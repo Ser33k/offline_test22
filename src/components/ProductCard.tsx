@@ -32,7 +32,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <button
             onClick={handleAddToCart}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-            aria-label={`Dodaj ${product.name} do koszyka`}
+            aria-label={`Dodaj ${product.name} do koszyka1`}
           >
             Dodaj do koszyka
           </button>

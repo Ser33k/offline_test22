@@ -21,16 +21,21 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | null>(null)
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [isClient, setIsClient] = useState(false)
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [receipts, setReceipts] = useState<CartContextType['receipts']>([])
 
-  // Załaduj dane z localStorage przy starcie
   useEffect(() => {
+    setIsClient(true)
     const savedCart = JSON.parse(localStorage.getItem('cart') || '[]')
     const savedReceipts = JSON.parse(localStorage.getItem('receipts') || '[]')
     setCartItems(savedCart)
     setReceipts(savedReceipts)
   }, [])
+
+  if (!isClient) {
+    return null // lub jakiś loading state
+  }
 
   const addToCart = (product: Product) => {
     setCartItems(prevItems => {
